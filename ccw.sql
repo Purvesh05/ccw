@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- version 4.7.2
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 08, 2018 at 02:13 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Jan 08, 2018 at 08:50 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `ccw`
@@ -23,134 +25,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `accounts`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `staff_id` int(10) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `designation` varchar(32) NOT NULL,
-  `authorities` varchar(32) NOT NULL,
-  `project_as` varchar(250) NOT NULL,
-  `pro_supervision` varchar(250) NOT NULL,
-  PRIMARY KEY (`staff_id`)
+CREATE TABLE `accounts` (
+  `roll_no` int(6) NOT NULL,
+  `first_name` varchar(32) NOT NULL,
+  `last_name` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `acc_status` enum('not activated','activated') NOT NULL DEFAULT 'not activated',
+  `activation_id` varchar(128) DEFAULT NULL,
+  `acc_act_time` timestamp NULL DEFAULT NULL,
+  `last_login` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `contractors`
+-- Dumping data for table `accounts`
 --
 
-CREATE TABLE IF NOT EXISTS `contractors` (
-  `form_id` int(10) NOT NULL,
-  `project_domain` varchar(250) NOT NULL,
-  `details_contractors` varchar(250) NOT NULL,
-  `bugget` int(10) NOT NULL,
-  `platform` varchar(250) NOT NULL,
-  `requirements` varchar(250) NOT NULL,
-  `tent_deadline` date NOT NULL,
-  `date_meet` date NOT NULL,
-  PRIMARY KEY (`form_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+INSERT INTO `accounts` (`roll_no`, `first_name`, `last_name`, `email`, `password`, `created_on`, `acc_status`, `activation_id`, `acc_act_time`, `last_login`) VALUES
+(501550, 'Harshit', 'Rai', 'harshitrai68@gmail.com', '$2y$10$UXvhrWElNnTWAqV/lA2UF../6rzZBAfqka8Oy7nKthCYWP3PrFpvO', '2018-01-08 19:24:11', 'activated', NULL, '2018-01-08 19:26:43', NULL);
 
 --
--- Table structure for table `core_members`
+-- Indexes for dumped tables
 --
 
-CREATE TABLE IF NOT EXISTS `core_members` (
-  `member_id` int(10) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `branch` varchar(10) NOT NULL,
-  `year` int(10) NOT NULL,
-  `contact_no` int(12) NOT NULL,
-  `email_id` int(32) NOT NULL,
-  `photo` blob NOT NULL,
-  PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
 --
--- Table structure for table `new_memberagnel`
+-- Indexes for table `accounts`
 --
-
-CREATE TABLE IF NOT EXISTS `new_memberagnel` (
-  `member_id` int(10) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `contact_no` int(10) NOT NULL,
-  `email_id` varchar(32) NOT NULL,
-  `branch` varchar(12) NOT NULL,
-  `experience` varchar(250) NOT NULL,
-  `specialization` varchar(250) NOT NULL,
-  `photo` blob NOT NULL,
-  `id_photo` blob NOT NULL,
-  `progress` varchar(250) NOT NULL,
-  `gender` varchar(7) NOT NULL,
-  `dob` date NOT NULL,
-  PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `new_memberother`
---
-
-CREATE TABLE IF NOT EXISTS `new_memberother` (
-  `member_id` int(10) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `contact_no` int(12) NOT NULL,
-  `email_id` varchar(32) NOT NULL,
-  `branch` varchar(12) NOT NULL,
-  `college_name` varchar(40) NOT NULL,
-  `experience` varchar(250) NOT NULL,
-  `specialization` varchar(250) NOT NULL,
-  `photo` blob NOT NULL,
-  `id_photo` blob NOT NULL,
-  `progress` varchar(250) NOT NULL,
-  `gender` varchar(7) NOT NULL,
-  `dob` date NOT NULL,
-  PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `project_table`
---
-
-CREATE TABLE IF NOT EXISTS `project_table` (
-  `project_id` int(32) NOT NULL,
-  `contractor_id` int(32) NOT NULL,
-  `project_domain` varchar(40) NOT NULL,
-  `description` varchar(250) NOT NULL,
-  `cost` int(12) NOT NULL,
-  `team_work` varchar(250) NOT NULL,
-  `assigned_date` date NOT NULL,
-  `last_date` date NOT NULL,
-  `current_status` varchar(250) NOT NULL,
-  `milestone` varchar(250) NOT NULL,
-  PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_profile`
---
-
-CREATE TABLE IF NOT EXISTS `user_profile` (
-  `member_id` int(10) NOT NULL,
-  `current_project` varchar(250) NOT NULL,
-  `credit_point` int(10) NOT NULL,
-  `task_assign` varchar(250) NOT NULL,
-  `progress` varchar(250) NOT NULL,
-  `domain` varchar(250) NOT NULL,
-  PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`roll_no`),
+  ADD UNIQUE KEY `email` (`email`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
