@@ -12,7 +12,8 @@ if(isset($_POST['signup'])) {
 	$roll_no = $_POST['roll_no'];
 	$email = $_POST['email'];
 	$password_txt = $_POST['password'];
-
+	$gender = $_POST['gender'];
+	echo($gender);
 }
    
 	//password hashing begins here
@@ -44,13 +45,16 @@ if(isset($_POST['signup'])) {
 	//account activation id creation ends here
 
 	//Database name = users. Table name = signup
-	$query = "INSERT INTO accounts(roll_no,first_name,last_name,email,password,activation_id)VALUES('$roll_no','$first_name','$last_name','$email','$hashed_pass','$acc_act_hash')";
-	   
-	$result=mysqli_query($conn,$query);
+	$query1 = "INSERT INTO accounts(roll_no,email,password,activation_id)VALUES('$roll_no','$email','$hashed_pass','$acc_act_hash')";
+	   echo($query1);
+	$result1=mysqli_query($conn,$query1);
 
+	$query2 = "INSERT INTO profiles(roll_no,first_name,last_name,gender)VALUES('$roll_no','$first_name','$last_name','$gender')";
+	   echo($query2);
+	$result2=mysqli_query($conn,$query2);
 	//echo($result);
 
-	if($result)
+	if($result1 && $result2)
 	{
 		$hash1 = sha1($roll_no.$first_name.$email);
 		$hash_p1 = "aid=$hash1";
@@ -94,8 +98,7 @@ if(isset($_POST['signup'])) {
 	}
 	else
 	{
-		echo "error in insertion";
-		echo "Error: " . $query . "<br>" . mysqli_error($conn);
+		echo("Error Occured...");
 	}
 
 
