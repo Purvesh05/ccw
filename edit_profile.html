@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Profile</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	 <script>
+    function validate() {
+      var roll_no = document.forms["profile"]["roll-no"].value;
+      console.log(roll-no);
+   
+      //roll_no validation
+      if ((roll-no < 501201)||(roll-no > 501699)) {
+        alert("Please Enter a Valid Roll Number");
+        return (false);
+      }
+      //email validation
+      if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(profile.email.value)))  
+      {  
+        alert("PLease enter a valid Email ID.");
+        return (false);
+      }  
+      
+      
+    }
+		 
+	$(document).ready(function(){                                                          
+    $("#git").click(function(){
+		
+        $("#git_dis").show();
+	
+		$("#link_dis").hide();
+		
+	
+    });
+
+    $("#link").click(function(){
+		$("git_dis").hide();  
+        $("#link_dis").show();   
+		
+		   
+	     
+	
+    });
+});	 
+		 
+  </script>
+	
+	
+</head>
+<body>
+<center>
+<h2>Profile</h2>
+	
+
+	
+  
+  <form action="edit_profile.php" method="post" name="profile" onsubmit="return validate()">
+ 
+ 	
+ 	  	
+  	  	<h4>Profile Pciture</h4><br>
+
+      <img src="images/1.jpg" alt="dp" target="_blank"  width="300px" ><br>
+	
+		<input type="file" ><br>
+	
+  
+      <label  for="name">Name</label><br>
+      <input type="text"  required id="name" placeholder="Enter Name" name="name"><br>
+  
+    
+   
+      <label for="roll-no">Roll No.</label><br>
+      <input type="text"   required="true" id="roll-no" placeholder="Enter Roll No." name="Roll No."><br>
+   
+    
+   
+      <label  for="email">Email</label><br>
+      <input type="email" required="true" id="email"   placeholder="Enter email" name="email"><br>
+    
+    
+  
+      <label  for="contact-no">Contact No.</label><br>
+      <input type="text" id="contact-no" required="true" placeholder="Enter Mobile No." name="contact-no"><br>
+    
+    
+    
+     
+      <label class="control-label lead" for="contact-no">Date Of Birth</label><br>
+      <input type="date" class="form-control" required="true" id="date" placeholder="DD-MM-YY" name="date"><br>
+    
+    
+    
+   
+      <label  for="hobbies">Hobbies</label><br>
+      <textarea name="hobbies" id="hobbies" cols="30" rows="1"  placeholder="Enter hobbies" ></textarea><br>
+    
+    
+     
+   
+      <label  for="language">Language Know</label><br>
+      <textarea name="language" id="languagae"  cols="30" rows="1"  placeholder="Enter know language"></textarea><br>
+    
+    
+    
+  
+      <label  for="project">Previous Works(Any Projects)</label><br>
+      <textarea name="project" id="project" required="true" cols="30" rows="1"   placeholder="Any project you worked on" ></textarea><br>
+    
+      
+     <label  for="account-detail">Account detail:</label><br>
+      <label  for="GITHUB"><input type="radio" id="git" name="account-detail">GitHub</label><br>
+      <label  for="Linkdein"><input type="radio" id="link" name="account-detail">Linkdein</label><br>
+      
+      <div id="git_dis" style="display: none">
+	
+		<label><p>Enter your GitHub Username:<br></p></label> 
+      <input id="git_dis" type="text" name="git-acc" placeholder="Username" required>
+      <br>	
+		</div>
+
+    <div id="link_dis" style="display: none">
+
+		<label><p>Enter your Linkdein Username:<br></p></label> 
+      <input id="link_dis" type="text" name="link-acc" placeholder="Username" required>
+      <br>	
+		</div>
+
+    <br><br><br>
+    
+    
+    
+   <input type="button" name="edit_profile"  value="Save changes"><br>
+   
+		</form>
+    
+	
+  </center>
+
+</body>
+</html>
